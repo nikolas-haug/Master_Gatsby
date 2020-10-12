@@ -1,18 +1,15 @@
 import React from 'react';
 import { Link, navigate } from 'gatsby';
+import styled from 'styled-components';
 
-// function goToSlicemasters() {
-//     // 1. Wait for 2 seconds
-//     setTimeout(() => {
-//         console.log('Go to slicers!!!');
-//         navigate('/slicemasters', { replace: true });
-//     }, 2000);
-//     // 2. Change the page
-// }
+const NavStyles = styled.nav`
+    background: green;
+    
+`;
 
 export default function Nav() {
     return (
-        <nav>
+        <NavStyles>
             <ul>
                 <li>
                     <Link to="/">Hot Now</Link>
@@ -30,6 +27,6 @@ export default function Nav() {
                     <Link to="/order">Order Ahead!</Link>
                 </li>
             </ul>
-        </nav>
+        </NavStyles>
     )
 }
