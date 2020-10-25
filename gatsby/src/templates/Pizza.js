@@ -14,7 +14,7 @@ export default function SinglePizzaPage({ data }) {
     const { pizza } = data;
     return (
         <>
-            <SEO title={pizza.name} />
+            <SEO title={pizza.name} image={pizza.image?.asset?.fluid?.src} />
             <PizzaGrid>
                 <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
                 <div>
