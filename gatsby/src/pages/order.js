@@ -54,7 +54,7 @@ export default function OrderPage({ data }) {
                             </div>
                             <div>
                                 {['S', 'M', 'L'].map((size) => (
-                                    <button type="button" onClick={() => addToOrder({
+                                    <button type="button" key={size} onClick={() => addToOrder({
                                         id: pizza.id,
                                         size
                                     })}>
