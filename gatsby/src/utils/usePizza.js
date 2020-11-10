@@ -39,7 +39,8 @@ export default function usePizza({ pizzas, values }) {
             order: attachNamesAndPrices(order, pizzas),
             total: formatMoney(calculateOrderTotal(order, pizzas)),
             name: values.name,
-            email: values.email
+            email: values.email,
+            mapleSyrup: values.mapleSyrup
         }
         // console.log(body);
         // 4. Send this data to a serverless function when they check out
