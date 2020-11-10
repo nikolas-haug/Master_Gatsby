@@ -9,9 +9,14 @@ function generateOrderEmail({ order, total }) {
                     <img src="${item.thumbnail}" alt="${item.name}" />
                     ${item.size} ${item.name} - ${item.price}
                 </li>
-            `)}
+            `).join('')}
          </ul>
-         <p>Your total is $${total} due at pickup</p>
+         <p>Your total is <strong>${total}</strong> due at pickup</p>
+         <style>
+            ul {
+                list-style: none;
+            }
+         </style>
     </div>`;
 }
 
@@ -25,7 +30,15 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// custom utility wait function
+function wait(ms = 0) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms);
+    });
+} 
+
 exports.handler = async (event, context) => {
+    await wait(5000);
     const body = JSON.parse(event.body);
     console.log(body);
     // Validate the data coming in is correct
@@ -45,12 +58,12 @@ exports.handler = async (event, context) => {
 
     // Send the success or error message
 
-    // Test send an email
+    // send the email
     const info = await transporter.sendMail({
         from: 'Slick\'s Slices <slick@examaple.com',
-        to: 'orders@example.com',
+        to: `${body.name} <${body.email}>, order@example.com`,
         subject: 'New Order',
-        html: `<p>Your new pizza order is here!</p>`
+        html: generateOrderEmail({ order: body.order, total: body.total })
     });
     console.log(info);
     console.log(`event: ${event}, context: ${context}`);
