@@ -54,6 +54,16 @@ exports.handler = async (event, context) => {
         }
     }
 
+    // make sure they actually have items in that order
+    if(!body.order.length) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: `Why would you order nothing?`
+            })
+        }
+    }
+
     // sent the email
 
     // Send the success or error message
