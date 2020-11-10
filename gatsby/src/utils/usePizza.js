@@ -30,7 +30,7 @@ export default function usePizza({ pizzas, values }) {
     // this is the function that is run when someone submits the form
     async function submitOrder(e) {
         e.preventDefault();
-        console.log(e);
+        // console.log(e);
         setLoading(true);
         setError(null);
         setMessage(null);
@@ -41,7 +41,7 @@ export default function usePizza({ pizzas, values }) {
             name: values.name,
             email: values.email
         }
-        console.log(body);
+        // console.log(body);
         // 4. Send this data to a serverless function when they check out
         const res = await fetch(`${process.env.GATSBY_SERVERLESS_BASE}/placeOrder`, {
             method: 'POST',
