@@ -1,5 +1,21 @@
 import { useState, useEffect } from 'react';
 
+const gql = String.raw;
+
+// graphql fragment interpolated
+const deets = gql `
+    name
+    _id
+    image {
+        asset {
+            url
+            metadata {
+                lqip
+            }
+        }
+    }
+`;
+
 export default function useLatestData() {
     // hot slices
     const [hotSlices, setHotSlices] = useState();
@@ -14,15 +30,15 @@ export default function useLatestData() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                query: `
+                query: gql `
                 query {
-                    StoreSettings(id:"downtown") {
+                    StoreSettings(id: "downtown") {
                       name
                       slicemaster {
-                        name
+                        ${deets}
                       }
                       hotSlices {
-                        name
+                        ${deets}
                       }
                     }
                   }
@@ -34,6 +50,10 @@ export default function useLatestData() {
             setHotSlices(res.data.StoreSettings.hotSlices);
             setSlicemasters(res.data.StoreSettings.slicemaster)
         }))
+        .catch(err => {
+            console.log('Shoot!!!');
+            console.log(err);
+        })
     }, []);
     return {
         hotSlices,

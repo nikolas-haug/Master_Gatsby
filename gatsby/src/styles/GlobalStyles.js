@@ -75,6 +75,11 @@ const GlobalStyles = createGlobalStyle`
     max-width: 100%;
   }
 
+  .tilt {
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
 `;
 
 export default GlobalStyles;
